@@ -1,7 +1,6 @@
 // server.js
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
 import cors from 'cors';
 
 import { PORT } from './config/env.js';
@@ -19,12 +18,6 @@ app.use(cors({
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
-app.use(session({
-    secret: 'session_secret_key', // Cambia esto por una clave secreta en producción
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Usar 'true' si usas HTTPS
-}));
 
 app.use('/api', authRoutes)
 

@@ -1,5 +1,5 @@
 (async () => {
-    const response = await fetch('http://localhost:4000/session', {
+    const response = await fetch ('http://localhost:4000/api/session', {
         method: 'GET',
         credentials: 'include' // Importante para enviar las cookies de sesión
     })
@@ -19,11 +19,10 @@
 
 // Manejar el cierre de sesión
 document.getElementById('logout').addEventListener('click', async () => {
-    const response = await fetch('http://localhost:4000/logout', {
+    const response = await fetch ('http://localhost:4000/api/logout', {
         method: 'POST',
         credentials: 'include'
     })
-    
     if (!response.ok) {
         throw new Error('Error al cerrar sesión');
     } else {

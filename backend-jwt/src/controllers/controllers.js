@@ -21,9 +21,10 @@ export const authCtrl = {};
     try {
         const connection = await dataBase()
         const [rows] = await connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password])
-    
+        
+        const user = rows[0]
         // Validación de usuario
-        if (!users) {
+        if (!user) {
             return res.status(401).json({ message: 'Credenciales incorrectas' });
         }
 
@@ -48,21 +49,21 @@ export const authCtrl = {};
 
 // Endpoint para validar la sesión
 authCtrl.session = (req, res) => {
-    console.log(req.user);
+    try {
+        console.log(req.user);
     return res.json({ message: 'Acceso permitido a área protegida', user: req.user });
+    } catch (error) {
+        console.log(error)
+    }
 };
 
 // Endpoint de cierre de sesión (logout)
 authCtrl.logout = (req, res) => {
     try {
-        req.session.destroy(err => {
-            if (err) {
-                return res.status(500).json({ message: 'Error al cerrar sesión' });
-            }
             res.clearCookie('authToken');
             return res.json({ message: 'Cierre de sesión exitoso' });
-        });
-    } catch (error) {
+        }
+    catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Error Inesperado' });
     }

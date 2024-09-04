@@ -6,6 +6,6 @@ import { validarJwt } from '../middlewares/validar-jwt.js';
 export const authRoutes = Router();
 
 authRoutes.post('/register', authCtrl.register)
-authRoutes.get('/session', validarJwt, authCtrl.session)
 authRoutes.post('/login', authCtrl.login)
+authRoutes.get('/session', validarJwt, authCtrl.session)
 authRoutes.post('/logout', authCtrl.logout)
