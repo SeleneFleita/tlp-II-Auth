@@ -4,12 +4,10 @@ import express from 'express';
 import session from 'express-session';
 import morgan from 'morgan';
 import path from 'path';
-
+import { variablesBd } from './config/config.js';
 import { authRoutes } from './routes/routes.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
-
 const __dirname = path.resolve();
 
 // Middlewares 
@@ -25,7 +23,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: 'mi_secreto',
+    secret: variablesBd.SECRET_SESSION,
     resave: false,
     saveUninitialized: true,
     cookie: { 
@@ -38,4 +36,4 @@ app.use(session({
 
 app.use('/api', authRoutes)
 
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}/`));
+app.listen(variablesBd.PORT, () => console.log(`Server running on http://localhost:${variablesBd.PORT}/`));

@@ -1,13 +1,15 @@
 import mysql from 'mysql2/promise';
+import { variablesBd } from '../config/config.js';
 
 
 const dataBase = async () => {
 
 try {
     const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'db_system'
+    host: variablesBd.DB_HOST,
+    user: variablesBd.DB_USER,
+    password: variablesBd.DB_PASSWORD,
+    database: variablesBd.DB_NAME
     });
     console.log('Conexión exitosa');
     return connection;
