@@ -2,8 +2,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-
-import { PORT } from './config/env.js';
+import { variablesBd } from './config/config.js';
 import morgan from 'morgan';
 import { authRoutes } from './routes/routes.js';
 
@@ -22,6 +21,6 @@ app.use(cookieParser());
 app.use('/api', authRoutes)
 
 // Servidor escuchando
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+app.listen(variablesBd.PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${variablesBd.PORT}`);
 });
